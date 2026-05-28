@@ -9,4 +9,8 @@ jobs:
     steps:
       - name: print welcome message
         run: echo "welcome from github actions" #run for shell commands
+      - name: checkout repo
+        uses: actions/checkout@v6.0.2
+      - name: list repo
+        run: ls -la
     
