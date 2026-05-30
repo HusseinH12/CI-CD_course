@@ -1,0 +1,31 @@
+name: push-pr workflow
+on:
+  push:
+    branches:
+      - main
+      - "release/**" # anything is done on any branch that starts with release/
+    paths:
+          - "src/**" # anything is done on any file that is in the src/ folder
+  pull_request:
+      branches:
+        - main
+        - "release/**" # anything is done on any branch that starts with release/
+      paths:
+        - "src/**" # anything is done on any file that is in the src/ folder
+
+
+
+jobs:
+  exmaple-job: #name of the job
+    runs-on: ubuntu-latest
+    steps:
+      - name: print welcome message
+        run: echo "welcome from github actions" #run for shell commands
+      - name: checkout repo
+        uses: actions/checkout@v6.0.2
+      - name: run the bash script
+        run: |
+          echo "Running the bash script..."
+          chmod +x ./src/script.sh # make the script executable
+          ./src/script.sh # run the script
+    
