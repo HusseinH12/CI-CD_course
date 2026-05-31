@@ -1,5 +1,14 @@
 on:
   workflow_dispatch:
+    inputs:
+      environment: # name of the input
+        description: "choose environment"
+        required: true # mandatory to choose
+        default: "staging" # the default will be staging if not choose
+        type: choice
+        options:
+          - staging
+          - production
 jobs:
   deploy:
     runs-on: ubuntu-latest
