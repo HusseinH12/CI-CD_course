@@ -1,0 +1,19 @@
+on:
+  workflow_dispatch:
+
+jobs:
+  hybrid_job:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: run command in ubuntu VM
+        run: echo "hello from ubuntu VM runner"
+      - name: run command from docker container
+        uses: docker://apline:latest
+        with:
+          entrypoint: /bin/sh
+          args: |
+            - -c echo "this step is from alpine container"
+      - name: run the command from ubuntu
+        run: echo "this step is runned through ubuntu VM"
+            
+        
