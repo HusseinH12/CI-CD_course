@@ -2,18 +2,16 @@ on:
   workflow_dispatch:
 
 jobs:
-  hybrid_job:
-    runs-on: ubuntu-22.04
+  job_1:
+    strategy:
+      fail-fast: false # if the job fails continue
+      max-parallel: 3
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        node-version: [14.x, 15.x, 16.x]
+    runs-on: ${{ matrix.os }}
     steps:
-      - name: run command in ubuntu VM
-        run: echo "hello from ubuntu VM runner"
-      - name: run command from docker container
-        uses: docker://apline:latest
+      - uses: actions/setup-node@v6.4.0
         with:
-          entrypoint: /bin/sh
-          args: |
-            - -c echo "this step is from alpine container"
-      - name: run the command from ubuntu
-        run: echo "this step is runned through ubuntu VM"
-            
-        
+          node_version: ${{ matrix.node-version }}
+  
