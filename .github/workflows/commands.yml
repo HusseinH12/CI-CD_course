@@ -4,8 +4,7 @@ jobs:
   workflowcommand:
     runs-on: ubuntu-latest
     steps:
-      - run: |
-          deprecated=true
-          if [[ deprecated ]]; then
-            echo "::warning:: deprecated function found"
-          fi
+      - name: set API key
+        run: echo "API_KEY=12345"
+      - name: usgin API key in next step
+        run: echo "using the key in the next step $API_KEY"
