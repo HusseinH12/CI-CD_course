@@ -7,4 +7,6 @@ jobs:
       - name: set API key
         run: echo "API_KEY=12345" >> $GITHUB_ENV
       - name: usgin API key in next step
-        run: echo "using the key in the next step $API_KEY"
+        run: | 
+          echo "::add-mask::$API_KEY" 
+          echo "using the key in the next step $API_KEY encrypted"
