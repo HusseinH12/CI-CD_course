@@ -3,15 +3,15 @@ on:
 
 jobs:
   job_1:
-    strategy:
-      fail-fast: false # if the job fails continue
+    strategy:  # how you want this job to work
+      fail-fast: false # if the job fails continue, it's true by default, and here we want it to continue to work even there is a problem or error
       max-parallel: 3
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        node_version: [14.x, 15.x, 16.x]
+        node_version: [14.x, 15.x, 16.x]  # this is custom variable and it will be defined under the matrix itself
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/setup-node@v6.4.0
         with:
-          node-version: ${{ matrix.node_version }}
+          node-version: ${{ matrix.node_version }}  # we can consider this as a loop, and this here is a parameter that this action needs from us 
   
