@@ -1,0 +1,36 @@
+on:
+  workflow_dispatch:
+jobs:
+  hybrid_job:    # name of the job
+    runs-on: ubuntu-latest
+    steps:
+      - name: run in ubuntu VM
+        run: echo "this step is on VM"
+      
+      - name: run inside docker alpine image
+        uses: docker://alpine:latest
+        with:
+          entrypoint: /bin/sh
+          args: |
+            - -c "echo 'this is running on container'"
+      - name: back to the VM
+        run: echo "back to the VM"
+
+  dockerazied_job:
+    runs-on: ubuntu-latest
+    container:
+      image: # any private image
+      credentials:
+        username: ${{ secrets.Docker_username }}
+        password: ${{ secrets.Docker_password }}
+
+    steps:
+      - name: this is container job
+        run: echo "this step is on container"
+
+      - name: this also is a container step in the same job
+        run: "this whole job is on container"
+      
+  
+          
+  
